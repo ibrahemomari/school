@@ -16,11 +16,6 @@ const StudentsParentIdsForm = () => {
       return;
     }
 
-    const data = {
-      parentName,
-      parentId,
-    };
-
     try {
       const response = await axios.post(
         'https://x8ki-letl-twmt.n7.xano.io/api:YwBN1GhQ/studentsinfo',
