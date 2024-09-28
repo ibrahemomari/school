@@ -25,7 +25,7 @@ const Home = () => {
       <button
         className='btn btn-primary mt-3'
         style={{ position: 'absolute', left: '16px', button: '16px' }}
-        onClick={handleAdminClick}>
+        onClick={handleAdminClick} disabled>
         Admin
       </button>
     </>
