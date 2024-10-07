@@ -24,15 +24,34 @@ const StudentParentInfo = () => {
     fetchStudentInfo();
   }, []);
 
+  console.log('🚀 ~ filteredStudentInfo ~ studentInfo:', studentInfo)
+  // Filter out duplicates based on st_parent_id
+  const uniqueParents = [];
+  const filteredStudentInfo = studentInfo.filter((info) => {
+    if (!uniqueParents.includes(info.st_parent_id)) {
+      uniqueParents.push(info.st_parent_id);
+      return true; // Keep the record if it's not a duplicate
+    }
+    return false; // Filter out duplicates
+  });
+
+  // Sort by created_at date (descending order)
+  const sortedStudentInfo = filteredStudentInfo.sort((a, b) => {
+    return new Date(b.created_at) - new Date(a.created_at); // For descending order
+    // return new Date(a.created_at) - new Date(b.created_at); // For ascending order
+  });
+
   return (
     <div className='container mt-5'>
       <h2>Student Parent Information</h2>
       <ul className='list-group'>
-        {studentInfo.map((info) => (
+        {sortedStudentInfo.map((info, key) => (
           <li key={info.id} className='list-group-item'>
+            {key + 1} <br />
             <strong>Parent Name:</strong> {info.st_parent_name} <br />
             <strong>Parent ID:</strong> {info.st_parent_id} <br />
-            <strong>Student Name:</strong> {info.student_name}
+            <strong>Student Name:</strong> {info.student_name} <br />
+            <strong>Created At:</strong> {new Date(info.created_at).toLocaleString()}
           </li>
         ))}
       </ul>
